@@ -17,6 +17,7 @@ import axios from "axios";
 import { Radio } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../Context/caartContext";
+import Banner from "..//Assets/images/banner.png";
 const HomePage = () => {
   let toast = useToast();
   let navigate = useNavigate();
@@ -160,6 +161,9 @@ const HomePage = () => {
           <Heading size={"md"} color={"teal"} marginLeft={"30px"} mt={4}>
             Filter by category
           </Heading>
+          <br />
+          <hr />
+          <br />
           <Box mt={7}>
             {cats?.map((el) => (
               <Flex direction={"column"}>
@@ -176,6 +180,9 @@ const HomePage = () => {
           <Heading size={"md"} color={"teal"} marginLeft={"30px"} mt={4}>
             Filter by Price
           </Heading>
+          <br />
+          <hr />
+          <br />
           <Box mt={7}>
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
               {prices.map((price) => (
@@ -198,6 +205,7 @@ const HomePage = () => {
           </Box>
         </GridItem>
         <GridItem colSpan={4}>
+          <Image src={Banner} w={"100%"} mt={10} mb={10} />
           <Heading textAlign={"center"}>All Products</Heading>
           <Grid
             templateColumns={{
