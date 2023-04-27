@@ -368,7 +368,7 @@ const MobileNav = () => {
             <Link href="/" fontWeight={"600"}>
               Home
             </Link>
-            <Link href="/" fontWeight={"600"}>
+            <Link href="/products" fontWeight={"600"}>
               Products
             </Link>
             <Link href="/category" fontWeight={"600"}>
@@ -434,7 +434,7 @@ const MobileNav = () => {
             <Link href="/" fontWeight={"600"}>
               Home
             </Link>
-            <Link href="/" fontWeight={"600"}>
+            <Link href="/products" fontWeight={"600"}>
               Products
             </Link>
             <Link href="/category" fontWeight={"600"}>

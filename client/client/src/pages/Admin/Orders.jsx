@@ -40,7 +40,7 @@ const AdminOrders = () => {
   let getOrders = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/auth/all-orders"
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/all-orders"
       );
 
       setOrders(data);
@@ -59,7 +59,7 @@ const AdminOrders = () => {
   let handleChange = async (id, value) => {
     try {
       let { data } = await axios.put(
-        `http://localhost:8080/api/v1/auth/orders-status/${id}`,
+        `https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/orders-status/${id}`,
         { status: value }
       );
       getOrders();
@@ -138,7 +138,7 @@ const AdminOrders = () => {
                     <Flex gap={{ base: "10px", md: "80px", lg: "80px" }}>
                       <Box>
                         <Image
-                          src={`http://localhost:8080/api/v1/product/product-image/${el._id}`}
+                          src={`https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
                           w={{ base: "100px", md: "150px", lg: "150px" }}
                           h={{ base: "100px", md: "150px", lg: "150px" }}
                         ></Image>

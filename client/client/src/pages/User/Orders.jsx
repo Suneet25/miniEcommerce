@@ -30,7 +30,7 @@ const Orders = () => {
   let getOrders = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/auth/orders"
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/orders"
       );
 
       setOrders(data);
@@ -101,7 +101,7 @@ const Orders = () => {
                     <Flex gap={{ base: "10px", md: "80px", lg: "80px" }}>
                       <Box>
                         <Image
-                          src={`http://localhost:8080/api/v1/product/product-image/${el._id}`}
+                          src={`https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
                           w={{ base: "100px", md: "150px", lg: "150px" }}
                           h={{ base: "100px", md: "150px", lg: "150px" }}
                         ></Image>

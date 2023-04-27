@@ -83,7 +83,7 @@ const CartPage = () => {
       setLoading(true);
       let { nonce } = await instance.requestPaymentMethod();
       let { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/braintree/payment",
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/braintree/payment",
         { nonce, cart }
       );
       setLoading(false);
