@@ -67,7 +67,7 @@ const CartPage = () => {
   let getToken = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/product/braintree/token"
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/braintree/token"
       );
       setClientToken(data?.clientToken);
     } catch (error) {
@@ -75,10 +75,31 @@ const CartPage = () => {
     }
   };
   //payment
-  let handlePayment = () => {
-    localStorage.removeItem("cart");
-    setCart([]);
-    navigate("/success");
+  let handlePayment = async () => {
+    // localStorage.removeItem("cart");
+    // setCart([]);
+    // navigate("/success");
+    try {
+      setLoading(true);
+      let { nonce } = await instance.requestPaymentMethod();
+      let { data } = await axios.post(
+        "http://localhost:8080/api/v1/product/braintree/payment",
+        { nonce, cart }
+      );
+      setLoading(false);
+      localStorage.removeItem("cart");
+      setCart([]);
+      navigate("/success");
+      toast({
+        title: "Payment completed successfully",
+        status: "success",
+        isClosable: true,
+        position: "top-right",
+      });
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -119,7 +140,7 @@ const CartPage = () => {
                 <Flex gap={{ base: "10px", md: "80px", lg: "80px" }}>
                   <Box>
                     <Image
-                      src={`http://localhost:8080/api/v1/product/product-image/${el._id}`}
+                      src={`https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
                       w={{ base: "100px", md: "150px", lg: "150px" }}
                       h={{ base: "100px", md: "150px", lg: "150px" }}
                     ></Image>
@@ -231,7 +252,7 @@ const CartPage = () => {
                   color="white"
                   _hover={{ backgroundColor: "purple.500", color: "white" }}
                   onClick={handlePayment}
-                  disabled={!loading || !instance || !auth?.user?.address}
+                  isisabled={!auth?.user?.name}
                 >
                   {loading ? "Processing..." : "Make payment"}
                 </Button>

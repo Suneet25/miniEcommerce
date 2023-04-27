@@ -1,13 +1,10 @@
 import { Box, Flex, Heading, Stack, Link } from "@chakra-ui/react";
 import React from "react";
+import { BiHeart } from "react-icons/bi";
 
 const Footer = () => {
   return (
-    <Box
-      backgroundImage="linear-gradient(black, grey)"
-      p={10}
-      color={"aliceblue"}
-    >
+    <Box backgroundColor="gray" p={10} color={"black"}>
       <Heading size={"lg"} textAlign={"center"}>
         Made with love by Suneet
       </Heading>

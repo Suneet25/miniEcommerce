@@ -8,16 +8,13 @@ import {
   Collapse,
   Icon,
   Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
   useDisclosure,
-  useToast,
-  Menu,
-  MenuButton,
-  MenuList,
   MenuItem,
+  MenuList,
+  MenuButton,
+  Menu,
+  useToast,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -25,20 +22,19 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-
-import { FaShoppingCart } from "react-icons/fa";
 import { useAuth } from "../../Context/authContext";
 import { useNavigate } from "react-router-dom";
-import SearchForm from "../SearchForm";
-import useCategory from "../Hooks/CategoryHooks";
 import { useCart } from "../../Context/caartContext";
+import useCategory from "../Hooks/CategoryHooks";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+
+import SearchForm from "../SearchForm";
 import { Badge } from "antd";
-export default function Header() {
+export default function Header1() {
   const { isOpen, onToggle } = useDisclosure();
   let navigate = useNavigate();
-  let category = useCategory();
   return (
-    <Box >
+    <Box position={"sticky"} top={"0"} zIndex={"1"}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -66,28 +62,23 @@ export default function Header() {
         </Flex>
         <Flex
           flex={{ base: 1 }}
-          justify={{ base: "center", md: "space-between", lg: "space-between" }}
+          justify={{ base: "center", md: "space-between" }}
+          px={10}
         >
-          <Flex gap={2} onClick={() => navigate("/")} cursor={"pointer"}>
-            <Box
-              margin={"auto"}
-              display={{ base: "none", md: "contents", lg: "contents" }}
-            >
-              <FaShoppingCart className="logo" />
-            </Box>
-            <Text
-              className="logo"
-              letterSpacing={"3px"}
-              fontSize={{ base: "xs", md: "md", lg: "lg" }}
-            >
-              AWESOMERCE
-            </Text>
-          </Flex>
-          <Box ml={"30px"}>
+          <Text
+            className="logo"
+            letterSpacing={"3px"}
+            fontSize={{ base: "xs", md: "md", lg: "lg" }}
+            color={"black"}
+            onClick={() => navigate("/")}
+          >
+            AWESOMERCE
+          </Text>
+
+          <Box>
             <SearchForm />
           </Box>
-
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex display={{ base: "none", md: "flex" }} ml={10} gap={5}>
             <DesktopNav />
           </Flex>
         </Flex>
@@ -123,29 +114,17 @@ const DesktopNav = () => {
       {auth.user ? (
         <>
           <Flex gap={5}>
-            <Link
-              href="/"
-              _hover={{
-                backgroundColor: "teal.400",
-                color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
-            >
-              Home
+            <Link href="/products" color={"black"} fontWeight={"600"}>
+              Products
             </Link>
-            <Link
-              _hover={{
-                backgroundColor: "teal.400",
-                color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
-            >
+            <Link color={"black"}>
               <Menu isOpen={isOpen}>
-                <MenuButton onMouseEnter={onOpen} onMouseLeave={onClose}>
+                <MenuButton
+                  onMouseEnter={onOpen}
+                  onMouseLeave={onClose}
+                  color={"black"}
+                  fontWeight={"600"}
+                >
                   Category
                 </MenuButton>
                 <MenuList
@@ -156,7 +135,7 @@ const DesktopNav = () => {
                   <MenuItem
                     color="black"
                     borderRadius={"4px"}
-                    _hover={{ backgroundColor: "teal.400", color: "white" }}
+                    _hover={{ backgroundColor: "facebook.400", color: "white" }}
                     onClick={() => navigate(`/category`)}
                   >
                     All Categories
@@ -166,7 +145,10 @@ const DesktopNav = () => {
                       <MenuItem
                         color="black"
                         borderRadius={"4px"}
-                        _hover={{ backgroundColor: "teal.400", color: "white" }}
+                        _hover={{
+                          backgroundColor: "facebook.400",
+                          color: "white",
+                        }}
                         onClick={() => navigate(`/category/${el.slug}`)}
                       >
                         {el.name}
@@ -176,15 +158,7 @@ const DesktopNav = () => {
                 </MenuList>
               </Menu>
             </Link>
-            <Link
-              _hover={{
-                backgroundColor: "teal.400",
-
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
-            >
+            <Link>
               <Menu>
                 {({ isOpen }) => (
                   <>
@@ -193,15 +167,17 @@ const DesktopNav = () => {
                       as={Button}
                       rightIcon={<ChevronDownIcon />}
                       variant="link"
-                      color={"teal"}
-                      _hover={{ color: "white" }}
+                      color={"black"}
                     >
                       {auth?.user?.name}
                     </MenuButton>
                     <MenuList borderRadius={"5px"}>
                       <MenuItem
                         borderRadius={"4px"}
-                        _hover={{ backgroundColor: "teal.400", color: "white" }}
+                        _hover={{
+                          backgroundColor: "facebook.400",
+                          color: "white",
+                        }}
                       >
                         <Link
                           className="navLink "
@@ -215,7 +191,10 @@ const DesktopNav = () => {
                       <MenuItem
                         borderRadius={"4px"}
                         color="black"
-                        _hover={{ backgroundColor: "teal.400", color: "white" }}
+                        _hover={{
+                          backgroundColor: "facebook.400",
+                          color: "white",
+                        }}
                       >
                         <Link className="navLink " onClick={handleLogout}>
                           Logout
@@ -226,90 +205,94 @@ const DesktopNav = () => {
                 )}
               </Menu>
             </Link>
-            <Link
-              _hover={{
-                backgroundColor: "teal.400",
-                color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
-              href="/cart"
-              className="navLink "
-            >
+
+            <Link href="/cart" className="navLink " color={"black"}>
               <Badge count={cart?.length} showZero>
-                Cart
+                <HiOutlineShoppingBag size={"25px"} />
               </Badge>
             </Link>
           </Flex>
         </>
       ) : (
         <>
-          {" "}
           <Flex gap={5}>
-            <Link
-              href="/"
-              _hover={{
-                backgroundColor: "teal.400",
-                color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
-            >
-              Home
+            <Link href="/products" fontWeight={600} color={"black"}>
+              Products
             </Link>
-            <Link
-              href="/category"
-              _hover={{
-                backgroundColor: "teal.400",
-                color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
-            >
-              Category
+            <Link href="/category" fontWeight={600} color={"black"}>
+              <Menu isOpen={isOpen}>
+                <MenuButton
+                  onMouseEnter={onOpen}
+                  onMouseLeave={onClose}
+                  color={"black"}
+                  fontWeight={600}
+                >
+                  Category
+                </MenuButton>
+                <MenuList
+                  onMouseEnter={onOpen}
+                  onMouseLeave={onClose}
+                  borderRadius={"5px"}
+                >
+                  <MenuItem
+                    color="black"
+                    borderRadius={"4px"}
+                    _hover={{ backgroundColor: "facebook.400", color: "white" }}
+                    onClick={() => navigate(`/category`)}
+                  >
+                    All Categories
+                  </MenuItem>
+                  {category.map((el) => (
+                    <Box key={el._id}>
+                      <MenuItem
+                        color="black"
+                        borderRadius={"4px"}
+                        _hover={{
+                          backgroundColor: "facebook.400",
+                          color: "white",
+                        }}
+                        onClick={() => navigate(`/category/${el.slug}`)}
+                      >
+                        {el.name}
+                      </MenuItem>
+                    </Box>
+                  ))}
+                </MenuList>
+              </Menu>
             </Link>
-            <Link
+            <Button
+              as={"a"}
               href="/login"
-              className="navLink "
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              size={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bgColor={"black"}
               _hover={{
-                backgroundColor: "teal.400",
                 color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
+                bgColor: "black",
               }}
             >
               Login
-            </Link>
-            <Link
+            </Button>
+            <Button
               href="/register"
               className="navLink "
-              _hover={{
-                backgroundColor: "teal.400",
-                color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
+              as={"a"}
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              size={"sm"}
+              fontWeight={600}
+              color={"blue"}
+              bg={"white"}
             >
               Register
-            </Link>
-            <Link
-              href="/cart"
-              className="navLink "
-              _hover={{
-                backgroundColor: "teal.400",
-                color: "white",
-                px: "2",
-                py: "1",
-                borderRadius: "5px",
-              }}
-            >
+            </Button>
+
+            <Link href="/cart" className="navLink " color={"black"}>
               <Badge count={cart?.length} showZero>
-                Cart
+                <HiOutlineShoppingBag size={"25px"} />
               </Badge>
             </Link>
           </Flex>
@@ -382,8 +365,15 @@ const MobileNav = () => {
         <>
           {" "}
           <Stack gap={5}>
-            <Link href="/">Home</Link>
-            <Link href="/category">Category</Link>
+            <Link href="/" fontWeight={"600"}>
+              Home
+            </Link>
+            <Link href="/" fontWeight={"600"}>
+              Products
+            </Link>
+            <Link href="/category" fontWeight={"600"}>
+              Category
+            </Link>
             <Link>
               <Menu>
                 {({ isOpen }) => (
@@ -400,7 +390,10 @@ const MobileNav = () => {
                     <MenuList borderRadius={"5px"}>
                       <MenuItem
                         borderRadius={"4px"}
-                        _hover={{ backgroundColor: "teal.400", color: "white" }}
+                        _hover={{
+                          backgroundColor: "facebook.400",
+                          color: "white",
+                        }}
                       >
                         <Link
                           className="navLink "
@@ -413,7 +406,10 @@ const MobileNav = () => {
                       </MenuItem>
                       <MenuItem
                         borderRadius={"4px"}
-                        _hover={{ backgroundColor: "teal.400", color: "white" }}
+                        _hover={{
+                          backgroundColor: "facebook.400",
+                          color: "white",
+                        }}
                       >
                         <Link className="navLink " onClick={handleLogout}>
                           Logout
@@ -424,9 +420,9 @@ const MobileNav = () => {
                 )}
               </Menu>
             </Link>
-            <Link href="/cart" className="navLink ">
+            <Link href="/cart" className="navLink " color={"black"}>
               <Badge count={cart?.length} showZero>
-                Cart
+                <HiOutlineShoppingBag size={"25px"} />
               </Badge>
             </Link>
           </Stack>
@@ -435,17 +431,24 @@ const MobileNav = () => {
         <>
           {" "}
           <Stack gap={5}>
-            <Link href="/">Home</Link>
-            <Link href="/category">Category</Link>
+            <Link href="/" fontWeight={"600"}>
+              Home
+            </Link>
+            <Link href="/" fontWeight={"600"}>
+              Products
+            </Link>
+            <Link href="/category" fontWeight={"600"}>
+              Category
+            </Link>
             <Link href="/login" className="navLink ">
               Login
             </Link>
             <Link href="/register" className="navLink ">
               Register
             </Link>
-            <Link href="/cart" className="navLink ">
+            <Link href="/cart" className="navLink " color={"black"}>
               <Badge count={cart?.length} showZero>
-                Cart
+                <HiOutlineShoppingBag size={"25px"} />
               </Badge>
             </Link>
           </Stack>
@@ -454,67 +457,3 @@ const MobileNav = () => {
     </Stack>
   );
 };
-
-const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure();
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? "#"}
-        justify={"space-between"}
-        align={"center"}
-        _hover={{
-          textDecoration: "none",
-        }}
-      >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={"all .25s ease-in-out"}
-            transform={isOpen ? "rotate(180deg)" : ""}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
-  );
-};
-
-const NAV_ITEMS = [
-  // {
-  //   label: "Home",
-  //   href: "/",
-  // },
-  // {
-  //   label: "Category",
-  //   href: "/category",
-  // },
-];

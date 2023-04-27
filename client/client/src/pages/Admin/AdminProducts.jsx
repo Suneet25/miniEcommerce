@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   Grid,
   GridItem,
   Heading,
@@ -22,7 +23,7 @@ const AdminProducts = () => {
   let getAllProducts = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/product/get-product"
+        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product"
       );
       setItems(data.products);
     } catch (error) {
@@ -59,7 +60,9 @@ const AdminProducts = () => {
           <AdminMenu />
         </GridItem>
         <GridItem colSpan={4}>
-          <Heading textAlign={"center"}>All Products</Heading>
+          <Heading textAlign={"center"} color={"gray"}>
+            All Products
+          </Heading>
           <Grid
             templateColumns={{
               base: "repeat(1, 1fr)",
@@ -77,12 +80,27 @@ const AdminProducts = () => {
                   borderRadius={"7px"}
                 >
                   <Image
-                    src={`http://localhost:8080/api/v1/product/product-image/${el._id}`}
+                    src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
                   />
-                  <Heading fontSize={"sm"}>{el.name}</Heading>
-                  <Text>$ {el.price}</Text>
-                  <Text>Category:-{el.category.name}</Text>
-                  <Text>{el.description}</Text>
+                  <Flex justifyContent={"space-between"} alignItems={"center"}>
+                    <Heading fontSize={"sm"} mt={3}>
+                      {el.name}
+                    </Heading>
+                    <Heading
+                      fontSize={"md"}
+                      mt={3}
+                      color={"green"}
+                      fontWeight={"700"}
+                    >
+                      $ {el.price}
+                    </Heading>
+                  </Flex>
+                  <Text mt={3} fontWeight={500}>
+                    Category:-{el?.category?.name}
+                  </Text>
+                  <Text fontWeight={400} mt={3}>
+                    {el.description}
+                  </Text>
                 </GridItem>
               </Link>
             ))}

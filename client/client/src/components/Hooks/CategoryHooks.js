@@ -7,7 +7,7 @@ export default function useCategory() {
   let getAllCateegories = async () => {
     try {
       let { data } = await axios.get(
-        `http://localhost:8080/api/v1/category/get-category`
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category`
       );
 
       setCategory(data.categories);

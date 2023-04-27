@@ -72,9 +72,9 @@ const AdminMenu = () => {
             borderRadius: "5px",
           }}
           textAlign={"center"}
-          onClick={() => navigate("/dashboard/admin/users")}
+          onClick={() => navigate("/dashboard/admin/orders")}
         >
-          Users
+          Orders
         </Box>
       </VStack>
     </Box>

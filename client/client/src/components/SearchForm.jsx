@@ -12,7 +12,7 @@ function SearchForm() {
     event.preventDefault();
     try {
       let { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/search/${values.keyword}`
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/search/${values.keyword}`
       );
       setValues({ ...values, results: data });
       navigate("/search");
@@ -28,17 +28,25 @@ function SearchForm() {
     <form onSubmit={handleSubmit}>
       <Flex direction={direction}>
         <Input
+          type="text"
+          w={"200px"}
+          display={{ base: "none", md: "none", lg: "block" }}
+          borderColor={"black"}
+          borderWidth={"2px"}
+          size={"sm"}
           placeholder="Search"
-          size="sm"
-          border={"2px solid teal"}
+          _placeholder={{ color: "black" }}
           value={values.keyword}
           onChange={(e) => setValues({ ...values, keyword: e.target.value })}
         />
         <Button
+          display={{ base: "none", md: "none", lg: "block" }}
+          borderWidth={"2px"}
           type="submit"
-          size={buttonSize}
+          size={"sm"}
           variant={"outline"}
-          colorScheme="teal"
+          colorScheme="black"
+          color={"black"}
         >
           <SearchIcon />
         </Button>
@@ -48,3 +56,29 @@ function SearchForm() {
 }
 
 export default SearchForm;
+
+{
+  /* <Flex>
+      <Input
+      type="text"
+      w={"200px"}
+      display={{ base: "none", md: "none", lg: "block" }}
+      borderColor={"black"}
+      borderWidth={"2px"}
+      size={"sm"}
+      placeholder="Search"
+      _placeholder={{ color: "black" }}
+    />
+    <Button
+      display={{ base: "none", md: "none", lg: "block" }}
+      borderWidth={"2px"}
+      type="submit"
+      size={"sm"}
+      variant={"outline"}
+      colorScheme="black"
+      color={"black"}
+    >
+      <SearchIcon />
+    </Button>
+  </Flex> */
+}

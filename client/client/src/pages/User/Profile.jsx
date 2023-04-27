@@ -40,7 +40,7 @@ const Profile = () => {
     let updatingdData = { name, password, phone, address };
     try {
       let { data } = await axios.put(
-        `http://localhost:8080/api/v1/auth/profile`,
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/profile`,
         updatingdData
       );
 
@@ -112,7 +112,11 @@ const Profile = () => {
                   p={8}
                 >
                   <Stack spacing={4}>
-                    <Heading fontSize={"4xl"} textAlign={"center"}>
+                    <Heading
+                      fontSize={"4xl"}
+                      textAlign={"center"}
+                      color={"gray"}
+                    >
                       User Profile
                     </Heading>
                     <FormControl id="firstName">

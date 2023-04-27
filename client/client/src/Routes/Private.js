@@ -10,7 +10,9 @@ export default function PrivateRoute() {
 
   useEffect(() => {
     let authCheck = async () => {
-      let res = await axios.get("http://localhost:8080/api/v1/auth/user-auth");
+      let res = await axios.get(
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/user-auth"
+      );
       if (res.data.ok) {
         setOk(true);
       } else {

@@ -21,21 +21,27 @@ const AllCategories = () => {
         justifyContent={"center"}
       >
         {category.map((el) => (
-          <Box key={el._id}>
-            <Button
-              size={{
-                base: "md",
-                md: "lg",
-                lg: "lg",
-              }}
-              backgroundColor={"purple.400"}
-              color={"white"}
-              _hover={{ backgroundColor: "purple.500", color: "white" }}
-              onClick={() => navigate(`/category/${el.slug}`)}
-            >
-              {el.name}
-            </Button>
-          </Box>
+          <Button
+            key={el._id}
+            variant={"outline"}
+            colorScheme="black"
+            p={{
+              base: "0",
+              md: "10",
+              lg: "10",
+            }}
+            size={{
+              base: "md",
+              md: "lg",
+              lg: "lg",
+            }}
+            // backgroundColor={"purple.400"}
+            // color={"white"}
+            _hover={{ backgroundColor: "purple.500", color: "white" }}
+            onClick={() => navigate(`/category/${el.slug}`)}
+          >
+            {el.name}
+          </Button>
         ))}
       </Grid>
     </Layout>

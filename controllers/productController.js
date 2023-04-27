@@ -110,7 +110,7 @@ export let getRelatedProductController = async (req, res) => {
 
     let products = await ProductModel.find({ category: cid, _id: { $ne: pid } })
       .select("-image")
-      .limit(3)
+      .limit(6)
       .populate("category");
     res.status(201).send({ success: true, products });
   } catch (error) {
@@ -345,13 +345,15 @@ export let braintreePaymentController = async (req, res) => {
 
     console.log(req.user._id);
     console.log(total);
-    let newTransation = gateway.transaction.sale({
-      amount: total,
-      paymentMethodNonce: nonce,
-      options: {
-        submitForSettlement: true,
+    let newTransation = gateway.transaction.sale(
+      {
+        amount: total,
+        paymentMethodNonce: nonce,
+        options: {
+          submitForSettlement: true,
+        },
       },
-      function(err, result) {
+      function (err, result) {
         if (result) {
           let order = new OrderModel({
             products: cart,
@@ -362,8 +364,8 @@ export let braintreePaymentController = async (req, res) => {
         } else {
           res.status(500).send(err);
         }
-      },
-    });
+      }
+    );
   } catch (error) {
     console.log(error);
   }

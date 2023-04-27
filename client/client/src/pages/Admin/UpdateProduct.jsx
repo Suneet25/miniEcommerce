@@ -39,7 +39,7 @@ const UpdateProduct = () => {
   let getSingleProduct = async () => {
     try {
       let { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product/${params.slug}`
       );
 
       console.log(data);
@@ -64,7 +64,7 @@ const UpdateProduct = () => {
   let getAllCat = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category"
+        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data.categories);
@@ -87,7 +87,7 @@ const UpdateProduct = () => {
       let answer = window.prompt("Are you sure want to delete this product ?");
       if (!answer) return;
       let { data } = await axios.delete(
-        `http://localhost:8080/api/v1/product/remove-product/${id}`
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/remove-product/${id}`
       );
       toast({
         title: "Product is deleted successfully",
@@ -121,7 +121,7 @@ const UpdateProduct = () => {
       productData.append("category", category);
 
       let { data } = await axios.put(
-        `http://localhost:8080/api/v1/product/update-product/${id}`,
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
@@ -173,7 +173,9 @@ const UpdateProduct = () => {
           <AdminMenu />
         </GridItem>
         <GridItem colSpan={4}>
-          <Heading textAlign={"center"}>Manage Products</Heading>
+          <Heading textAlign={"center"} color={"gray"}>
+            Manage Products
+          </Heading>
           <VStack>
             <Select
               placeholder="Select category"
@@ -216,7 +218,7 @@ const UpdateProduct = () => {
                 />
               ) : (
                 <Image
-                  src={`http://localhost:8080/api/v1/product/product-image/${id}`}
+                  src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${id}`}
                   alt="product-image"
                   height="200px"
                   width={"200px"}

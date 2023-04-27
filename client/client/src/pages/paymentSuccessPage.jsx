@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
 import { Box, Heading } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Success = () => {
   const [heading, setHeading] = useState(
     "please wait, transection is processing..."
   );
   const [Image, setImage] = useState("https://i.gifer.com/BvMu.gif");
-
+  let navigate = useNavigate();
   const handleSuccess = () => {
     setHeading("Payment Successful");
     setImage("https://c.tenor.com/xVfFIHxAzW4AAAAC/success.gif");
+    navigate("/dashboard/user/orders");
   };
 
   useEffect(() => {

@@ -3,6 +3,7 @@ import UserModel from "../models/usersModel.js";
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
 import { json } from "express";
+import OrderModel from "../models/orderModel.js";
 dotenv.config();
 
 //register user
@@ -199,6 +200,67 @@ export let updateProfileController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Something went wrong while updating profile",
+      error,
+    });
+  }
+};
+
+//getUserOrderContoller
+
+export let getUserOrderContoller = async (req, res) => {
+  try {
+    let orders = await OrderModel.find({ buyer: req.user._id })
+      .populate("products", "-image")
+      .populate("buyer", "name");
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong while getting user orders",
+      error,
+    });
+  }
+};
+
+//getAllOrderContoller
+
+export let getAllOrderContoller = async (req, res) => {
+  try {
+    let {} = req.params;
+    let orders = await OrderModel.find({})
+      .populate("products", "-image")
+      .populate("buyer", "name")
+      .sort({ createdAt: "-1" });
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong while getting user orders",
+      error,
+    });
+  }
+};
+
+//  orderStatusController
+
+export let orderStatusController = async (req, res) => {
+  try {
+    let { oid } = req.params;
+    let { status } = req.body;
+
+    let orders = await OrderModel.findByIdAndUpdate(
+      oid,
+      { status },
+      { new: true }
+    );
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong while updating status of orders",
       error,
     });
   }

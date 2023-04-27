@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
-import { prices } from "..//components/prices";
+import { prices } from "../components/prices";
 import {
   Box,
   Button,
@@ -18,7 +18,7 @@ import { Radio } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../Context/caartContext";
 import Banner from "..//Assets/images/banner.png";
-const HomePage = () => {
+const ProductsPage = () => {
   let toast = useToast();
   let navigate = useNavigate();
   let [cart, setCart] = useCart();
@@ -35,7 +35,7 @@ const HomePage = () => {
   let getTotal = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/product/product-count"
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-count"
       );
       if (data?.count) {
         setCount(data.count);
@@ -51,7 +51,7 @@ const HomePage = () => {
     try {
       setLoading(true);
       let { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product-list/${page}`
+        `https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product-list/${page}`
       );
       setLoading(false);
       setItems([...items, ...data?.products]);
@@ -71,7 +71,7 @@ const HomePage = () => {
   let getAllCat = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category"
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category"
       );
       if (data?.success) {
         setCats(data.categories);
@@ -96,7 +96,7 @@ const HomePage = () => {
     try {
       setLoading(true);
       let { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product-list/${page}`
+        `https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product-list/${page}`
       );
       setLoading(false);
       setItems(data.products);
@@ -121,7 +121,7 @@ const HomePage = () => {
   let filterProducts = async () => {
     try {
       let { data } = await axios.post(
-        "http://localhost:8080/api/v1/product/filter-product",
+        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/filter-product",
         { checked, radio }
       );
       setItems(data?.products);
@@ -222,14 +222,31 @@ const HomePage = () => {
                 p={10}
                 borderRadius={"7px"}
               >
-                <Image
-                  src={`http://localhost:8080/api/v1/product/product-image/${el._id}`}
-                />
-                <Heading fontSize={"sm"} mt={3}>
-                  {el.name}
-                </Heading>
-                <Text mt={3}>$ {el.price}</Text>
-                <Text mt={3}>Category:-{el.category.name}</Text>
+                <Box
+                  p={4}
+                  borderRadius="md"
+                  boxShadow="md"
+                  transition="box-shadow 0.2s"
+                  _hover={{ boxShadow: "lg" }}
+                >
+                  <Image
+                    src={`https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+                  />
+                </Box>
+                <Flex justifyContent={"space-between"} alignItems={"center"}>
+                  <Heading fontSize={"sm"} mt={3}>
+                    {el.name}
+                  </Heading>
+                  <Heading
+                    fontSize={"md"}
+                    mt={3}
+                    color={"green"}
+                    fontWeight={"700"}
+                  >
+                    $ {el.price}
+                  </Heading>
+                </Flex>
+
                 <Text mt={3}>{el.description.substring(0, 30)}</Text>
                 <Flex gap={3} mt={5}>
                   <Button
@@ -288,4 +305,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default ProductsPage;

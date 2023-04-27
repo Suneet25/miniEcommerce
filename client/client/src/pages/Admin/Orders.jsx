@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import {
   Box,
@@ -16,13 +16,23 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-
+import AdminMenu from "../../components/Layout/AdminMenu";
 import { useAuth } from "../../Context/authContext";
-import UserMenu from "../../components/Layout/UserMenu";
 import axios from "axios";
 import moment from "moment";
-const Orders = () => {
+import { Select } from "antd";
+let { Option } = Select;
+const AdminOrders = () => {
   let [auth] = useAuth();
+  let [status, setStatus] = useState([
+    "Not Process",
+    "Processing",
+    "Shipped",
+    "Delivered",
+    "Cancel",
+  ]);
+  let [changeStatus, setChangeStatus] = useState("");
+
   let [orders, setOrders] = useState([]);
 
   //getOrders
@@ -30,7 +40,7 @@ const Orders = () => {
   let getOrders = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/auth/orders"
+        "http://localhost:8080/api/v1/auth/all-orders"
       );
 
       setOrders(data);
@@ -39,14 +49,29 @@ const Orders = () => {
     }
   };
 
+  //changeStatus
+
   useEffect(() => {
     if (auth?.token) getOrders();
   }, [auth?.token]);
-  console.log(orders);
+
+  //changeStatus
+  let handleChange = async (id, value) => {
+    try {
+      let { data } = await axios.put(
+        `http://localhost:8080/api/v1/auth/orders-status/${id}`,
+        { status: value }
+      );
+      getOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Layout title={"User-Orders-Awesomerce App"}>
+    <Layout title={"Admin-Users-Awesomerce App"}>
       <Heading size={"md"} color={"teal"} marginLeft={"30px"} mt={4}>
-        User Pannel
+        Admin Pannel
       </Heading>
       <Grid
         templateColumns={{
@@ -58,7 +83,7 @@ const Orders = () => {
         p={5}
       >
         <GridItem>
-          <UserMenu />
+          <AdminMenu />
         </GridItem>
         <GridItem colSpan={4}>
           <Heading textAlign={"center"} color={"gray"}>
@@ -83,7 +108,19 @@ const Orders = () => {
                       <Tbody>
                         <Tr>
                           <Td>{i + 1}</Td>
-                          <Td>{el?.status}</Td>
+                          <Td>
+                            <Select
+                              bordered={false}
+                              onChange={(value) => handleChange(el._id, value)}
+                              defaultValue={el?.status}
+                            >
+                              {status.map((s, i) => (
+                                <Option key={i} value={s}>
+                                  {s}
+                                </Option>
+                              ))}
+                            </Select>
+                          </Td>
                           <Td>{el?.buyer?.name}</Td>
                           <Td>{moment(el.createAt).fromNow()}</Td>
                           <Td>{!el?.payment.success ? "Success" : "Failed"}</Td>
@@ -125,4 +162,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default AdminOrders;

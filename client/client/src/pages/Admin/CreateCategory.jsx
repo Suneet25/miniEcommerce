@@ -45,7 +45,7 @@ const CreateCategory = () => {
   let handleSubmit = async () => {
     try {
       let { data } = await axios.post(
-        "http://localhost:8080/api/v1/category/create-category",
+        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/create-category",
         { name }
       );
       if (data.success) {
@@ -79,7 +79,7 @@ const CreateCategory = () => {
   let getAllCat = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:8080/api/v1/category/get-category"
+        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data.categories);
@@ -99,7 +99,7 @@ const CreateCategory = () => {
   let handleDelete = async (id, name) => {
     try {
       let { data } = await axios.delete(
-        `http://localhost:8080/api/v1/category/remove-category/${id}`
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/remove-category/${id}`
       );
       if (data?.success) {
         toast({
@@ -139,7 +139,7 @@ const CreateCategory = () => {
     try {
       let id = JSON.parse(localStorage.getItem("updateCatId"));
       let { data } = await axios.put(
-        `http://localhost:8080/api/v1/category/update-category/${id}`,
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/update-category/${id}`,
         { name: updateCat }
       );
       if (data?.success) {
@@ -194,7 +194,9 @@ const CreateCategory = () => {
           <AdminMenu />
         </GridItem>
         <GridItem colSpan={4}>
-          <Heading textAlign={"center"}>Manage Category</Heading>
+          <Heading textAlign={"center"} color={"gray"}>
+            Manage Category
+          </Heading>
           {/* Categoryform */}
           <CategoryForm
             handleSubmit={handleSubmit}

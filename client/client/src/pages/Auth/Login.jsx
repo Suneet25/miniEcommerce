@@ -41,7 +41,7 @@ export default function Login() {
     let loginData = { email, password };
     try {
       let res = await axios.post(
-        `http://localhost:8080/api/v1/auth/login`,
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/login`,
         loginData
       );
 
@@ -103,6 +103,7 @@ export default function Login() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  placeholder="email-admin@gmail.com"
                 />
               </FormControl>
               <FormControl id="password" isInvalid={!password}>
@@ -111,6 +112,7 @@ export default function Login() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="password-admin"
                 />
               </FormControl>
               <Stack spacing={10}>

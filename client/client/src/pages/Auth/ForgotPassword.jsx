@@ -42,7 +42,7 @@ const ForgotPassword = () => {
     console.log(resetData);
     try {
       let res = await axios.post(
-        `http://localhost:8080/api/v1/auth/forgot-password`,
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/forgot-password`,
         resetData
       );
 

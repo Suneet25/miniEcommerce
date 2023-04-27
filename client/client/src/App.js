@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Box } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
@@ -11,13 +11,13 @@ import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/User/Dashboard";
 import PrivateRoute from "./Routes/Private";
-import Spinner from "./components/Spinner";
+
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import AdminPrivateRoute from "./Routes/AdminPrivateRoute";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CreateCategory from "./pages/Admin/CreateCategory";
 import CreateProducts from "./pages/Admin/CreateProducts";
-import Users from "./pages/Admin/Users";
+import AdminOrders from "./pages/Admin/Orders";
 import Orders from "./pages/User/Orders";
 import Profile from "./pages/User/Profile";
 import AdminProducts from "./pages/Admin/AdminProducts";
@@ -28,11 +28,15 @@ import AllCategories from "./pages/AllCategories";
 import CategoryProduct from "./pages/CategoryProduct";
 import CartPage from "./pages/CartPage";
 import Success from "./pages/paymentSuccessPage";
+
+import LandingPage from "./pages/LandingPage";
+import ProductsPage from "./pages/ProductsPage";
 function App() {
   return (
     <Box>
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/products" element={<ProductsPage />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
         <Route path="/success" element={<Success />}></Route>
         <Route path="/product/:slug" element={<ProductDetails />}></Route>
@@ -60,7 +64,7 @@ function App() {
           ></Route>
           <Route path="admin/product/:slug" element={<UpdateProduct />}></Route>
           <Route path="admin/products" element={<AdminProducts />}></Route>
-          <Route path="admin/users" element={<Users />}></Route>
+          <Route path="admin/orders" element={<AdminOrders />}></Route>
         </Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/contact" element={<Contact />}></Route>

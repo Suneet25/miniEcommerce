@@ -10,13 +10,16 @@ import {
   Image,
   Flex,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../Context/caartContext";
 
 const Search = () => {
+  let [cart, setCart] = useCart();
   let [values, setValues] = useSearch();
   let navigate = useNavigate();
-  console.log(values.result);
+  let toast = useToast();
   return (
     <Layout title={"Search results"}>
       <Heading textAlign={"center"} mt={10}>
@@ -44,13 +47,22 @@ const Search = () => {
               borderRadius={"7px"}
             >
               <Image
-                src={`http://localhost:8080/api/v1/product/product-image/${el._id}`}
+                src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
               />
-              <Heading fontSize={"sm"} mt={3}>
-                {el.name}
-              </Heading>
-              <Text mt={3}>$ {el.price}</Text>
-              <Text mt={3}>Category:-{el.category.name}</Text>
+              <Flex justifyContent={"space-between"} alignItems={"center"}>
+                <Heading fontSize={"sm"} mt={3}>
+                  {el.name}
+                </Heading>
+                <Heading
+                  fontSize={"md"}
+                  mt={3}
+                  color={"green"}
+                  fontWeight={"700"}
+                >
+                  $ {el.price}
+                </Heading>
+              </Flex>
+
               <Text mt={3}>{el.description.substring(0, 30)}</Text>
               <Flex gap={3} mt={5}>
                 <Button
@@ -67,6 +79,16 @@ const Search = () => {
                   backgroundColor={"gray.600"}
                   color={"white"}
                   _hover={{ backgroundColor: "gray.700", color: "white" }}
+                  onClick={() => {
+                    setCart([...cart, el]);
+                    localStorage.setItem("cart", JSON.stringify([...cart, el]));
+                    toast({
+                      title: "Item is added to cart",
+                      status: "success",
+                      isClosable: true,
+                      position: "top-right",
+                    });
+                  }}
                 >
                   Add to Cart
                 </Button>

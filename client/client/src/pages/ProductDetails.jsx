@@ -8,14 +8,19 @@ import {
   Text,
   Box,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { useCart } from "../Context/caartContext";
 
 const ProductDetails = () => {
   let params = useParams();
+  let toast = useToast();
+
+  let [cart, setCart] = useCart();
   let [product, setProduct] = useState({});
   let [relatedProducts, setRelatedProducts] = useState([]);
   let navigate = useNavigate();
@@ -23,7 +28,7 @@ const ProductDetails = () => {
   let getSingleProduct = async () => {
     try {
       let { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/get-product/${params.slug}`
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
       getRelatedProducts(data?.product?._id, data?.product?.category?._id);
@@ -36,7 +41,7 @@ const ProductDetails = () => {
   let getRelatedProducts = async (pid, cid) => {
     try {
       let { data } = await axios.get(
-        `http://localhost:8080/api/v1/product/related-products/${pid}/${cid}`
+        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/related-products/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
     } catch (error) {
@@ -72,7 +77,7 @@ const ProductDetails = () => {
           borderRadius={"7px"}
         >
           <Image
-            src={`http://localhost:8080/api/v1/product/product-image/${product._id}`}
+            src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${product._id}`}
             width={"500px"}
             height={"400px"}
           />
@@ -103,6 +108,7 @@ const ProductDetails = () => {
                 md: "lg",
                 lg: "xl",
               }}
+              fontWeight={"500"}
             >
               Category:-{product?.category?.name}
             </Text>
@@ -115,7 +121,9 @@ const ProductDetails = () => {
             >
               Description:-{product.description}
             </Text>
-            <Text fontSize={"lg"}>$ {product.price}</Text>
+            <Text fontSize={"lg"} color={"green"} fontWeight={"700"}>
+              $ {product.price}
+            </Text>
             <Text fontSize={"lg"}>Quantity:- {product.quantity}</Text>
             <Text as={"u"} color={"tomato"}>
               Shipping calculated at checkout.
@@ -126,6 +134,19 @@ const ProductDetails = () => {
                 backgroundColor={"gray.600"}
                 color={"white"}
                 _hover={{ backgroundColor: "gray.700", color: "white" }}
+                onClick={() => {
+                  setCart([...cart, product]);
+                  localStorage.setItem(
+                    "cart",
+                    JSON.stringify([...cart, product])
+                  );
+                  toast({
+                    title: "Item is added to cart",
+                    status: "success",
+                    isClosable: true,
+                    position: "top-right",
+                  });
+                }}
               >
                 Add to cart
               </Button>
@@ -158,14 +179,23 @@ const ProductDetails = () => {
             borderRadius={"7px"}
           >
             <Image
-              src={`http://localhost:8080/api/v1/product/product-image/${el._id}`}
-              w={"100px"}
-              h={"100px"}
+              src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+              w={"200px"}
+              h={"200px"}
             />
-            <Heading fontSize={"sm"} mt={3}>
-              {el.name}
-            </Heading>
-            <Text mt={3}>$ {el.price}</Text>
+            <Flex justifyContent={"space-between"} alignItems={"center"}>
+              <Heading fontSize={"sm"} mt={3}>
+                {el.name}
+              </Heading>
+              <Heading
+                fontSize={"md"}
+                mt={3}
+                color={"green"}
+                fontWeight={"700"}
+              >
+                $ {el.price}
+              </Heading>
+            </Flex>
             <Text mt={3}>Category:-{el.category.name}</Text>
             <Text mt={3}>{el.description.substring(0, 30)}</Text>
 
@@ -184,6 +214,16 @@ const ProductDetails = () => {
                 backgroundColor={"gray.600"}
                 color={"white"}
                 _hover={{ backgroundColor: "gray.700", color: "white" }}
+                onClick={() => {
+                  setCart([...cart, el]);
+                  localStorage.setItem("cart", JSON.stringify([...cart, el]));
+                  toast({
+                    title: "Item is added to cart",
+                    status: "success",
+                    isClosable: true,
+                    position: "top-right",
+                  });
+                }}
               >
                 Add to Cart
               </Button>
