@@ -41,7 +41,7 @@ export default function Login() {
     let loginData = { email, password };
     try {
       let res = await axios.post(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/login`,
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/auth/login`,
         loginData
       );
 

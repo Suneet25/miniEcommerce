@@ -45,7 +45,7 @@ const CreateCategory = () => {
   let handleSubmit = async () => {
     try {
       let { data } = await axios.post(
-        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/create-category",
+        " https://dull-teal-angelfish-wig.cyclic.app/api/v1/category/create-category",
         { name }
       );
       if (data.success) {
@@ -79,7 +79,7 @@ const CreateCategory = () => {
   let getAllCat = async () => {
     try {
       let { data } = await axios.get(
-        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category"
+        " https://dull-teal-angelfish-wig.cyclic.app/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data.categories);
@@ -99,7 +99,7 @@ const CreateCategory = () => {
   let handleDelete = async (id, name) => {
     try {
       let { data } = await axios.delete(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/remove-category/${id}`
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/category/remove-category/${id}`
       );
       if (data?.success) {
         toast({
@@ -139,7 +139,7 @@ const CreateCategory = () => {
     try {
       let id = JSON.parse(localStorage.getItem("updateCatId"));
       let { data } = await axios.put(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/update-category/${id}`,
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/category/update-category/${id}`,
         { name: updateCat }
       );
       if (data?.success) {

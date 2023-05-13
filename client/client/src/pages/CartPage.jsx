@@ -67,7 +67,7 @@ const CartPage = () => {
   let getToken = async () => {
     try {
       let { data } = await axios.get(
-        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/braintree/token"
+        "https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/braintree/token"
       );
       setClientToken(data?.clientToken);
     } catch (error) {
@@ -83,7 +83,7 @@ const CartPage = () => {
       setLoading(true);
       let { nonce } = await instance.requestPaymentMethod();
       let { data } = await axios.post(
-        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/braintree/payment",
+        "https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/braintree/payment",
         { nonce, cart }
       );
       setLoading(false);
@@ -140,7 +140,7 @@ const CartPage = () => {
                 <Flex gap={{ base: "10px", md: "80px", lg: "80px" }}>
                   <Box>
                     <Image
-                      src={`https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+                      src={`https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${el._id}`}
                       w={{ base: "100px", md: "150px", lg: "150px" }}
                       h={{ base: "100px", md: "150px", lg: "150px" }}
                     ></Image>

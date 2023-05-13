@@ -22,7 +22,7 @@ const CategoryProduct = () => {
   let getCategoryProduct = async () => {
     try {
       let { data } = await axios(
-        `https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/category-product/${params.slug}`
+        `https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/category-product/${params.slug}`
       );
       setCategory(data?.category);
       setProducts(data?.products);
@@ -59,7 +59,7 @@ const CategoryProduct = () => {
               borderRadius={"7px"}
             >
               <Image
-                src={`https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+                src={`https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${el._id}`}
               />
               <Heading fontSize={"sm"} mt={3}>
                 {el.name}

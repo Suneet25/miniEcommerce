@@ -35,7 +35,7 @@ const CreateProducts = () => {
   let getAllCat = async () => {
     try {
       let { data } = await axios.get(
-        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category"
+        " https://dull-teal-angelfish-wig.cyclic.app/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data.categories);
@@ -64,7 +64,7 @@ const CreateProducts = () => {
       productData.append("category", category);
 
       let { data } = await axios.post(
-        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/create-product",
+        " https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/create-product",
         productData
       );
       if (data?.success) {

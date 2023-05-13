@@ -28,7 +28,7 @@ const ProductDetails = () => {
   let getSingleProduct = async () => {
     try {
       let { data } = await axios.get(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product/${params.slug}`
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
       getRelatedProducts(data?.product?._id, data?.product?.category?._id);
@@ -41,7 +41,7 @@ const ProductDetails = () => {
   let getRelatedProducts = async (pid, cid) => {
     try {
       let { data } = await axios.get(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/related-products/${pid}/${cid}`
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/related-products/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
     } catch (error) {
@@ -77,7 +77,7 @@ const ProductDetails = () => {
           borderRadius={"7px"}
         >
           <Image
-            src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${product._id}`}
+            src={` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${product._id}`}
             width={"500px"}
             height={"400px"}
           />
@@ -179,7 +179,7 @@ const ProductDetails = () => {
             borderRadius={"7px"}
           >
             <Image
-              src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+              src={` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${el._id}`}
               w={"200px"}
               h={"200px"}
             />

@@ -35,7 +35,7 @@ const ProductsPage = () => {
   let getTotal = async () => {
     try {
       let { data } = await axios.get(
-        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-count"
+        "/api/v1/product/product-count"
       );
       if (data?.count) {
         setCount(data.count);
@@ -51,7 +51,7 @@ const ProductsPage = () => {
     try {
       setLoading(true);
       let { data } = await axios.get(
-        `https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product-list/${page}`
+        `https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/get-product-list/${page}`
       );
       setLoading(false);
       setItems([...items, ...data?.products]);
@@ -71,7 +71,7 @@ const ProductsPage = () => {
   let getAllCat = async () => {
     try {
       let { data } = await axios.get(
-        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category"
+        "https://dull-teal-angelfish-wig.cyclic.app/api/v1/category/get-category"
       );
       if (data?.success) {
         setCats(data.categories);
@@ -96,7 +96,7 @@ const ProductsPage = () => {
     try {
       setLoading(true);
       let { data } = await axios.get(
-        `https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product-list/${page}`
+        `https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/get-product-list/${page}`
       );
       setLoading(false);
       setItems(data.products);
@@ -121,7 +121,7 @@ const ProductsPage = () => {
   let filterProducts = async () => {
     try {
       let { data } = await axios.post(
-        "https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/filter-product",
+        "https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/filter-product",
         { checked, radio }
       );
       setItems(data?.products);
@@ -230,7 +230,7 @@ const ProductsPage = () => {
                   _hover={{ boxShadow: "lg" }}
                 >
                   <Image
-                    src={`https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+                    src={`https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${el._id}`}
                   />
                 </Box>
                 <Flex justifyContent={"space-between"} alignItems={"center"}>

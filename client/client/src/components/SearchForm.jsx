@@ -12,7 +12,7 @@ function SearchForm() {
     event.preventDefault();
     try {
       let { data } = await axios.get(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/search/${values.keyword}`
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/search/${values.keyword}`
       );
       setValues({ ...values, results: data });
       navigate("/search");

@@ -40,7 +40,7 @@ const Profile = () => {
     let updatingdData = { name, password, phone, address };
     try {
       let { data } = await axios.put(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/profile`,
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/auth/profile`,
         updatingdData
       );
 

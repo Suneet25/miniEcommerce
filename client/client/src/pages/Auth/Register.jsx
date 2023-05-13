@@ -44,7 +44,7 @@ export default function Register() {
     let registeredData = { name, email, password, phone, address, answer };
     try {
       let res = await axios.post(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/auth/register`,
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/auth/register`,
         registeredData
       );
 

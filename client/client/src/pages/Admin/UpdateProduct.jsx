@@ -39,7 +39,7 @@ const UpdateProduct = () => {
   let getSingleProduct = async () => {
     try {
       let { data } = await axios.get(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product/${params.slug}`
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/get-product/${params.slug}`
       );
 
       console.log(data);
@@ -64,7 +64,7 @@ const UpdateProduct = () => {
   let getAllCat = async () => {
     try {
       let { data } = await axios.get(
-        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/category/get-category"
+        " https://dull-teal-angelfish-wig.cyclic.app/api/v1/category/get-category"
       );
       if (data?.success) {
         setCategories(data.categories);
@@ -87,7 +87,7 @@ const UpdateProduct = () => {
       let answer = window.prompt("Are you sure want to delete this product ?");
       if (!answer) return;
       let { data } = await axios.delete(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/remove-product/${id}`
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/remove-product/${id}`
       );
       toast({
         title: "Product is deleted successfully",
@@ -121,7 +121,7 @@ const UpdateProduct = () => {
       productData.append("category", category);
 
       let { data } = await axios.put(
-        ` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/update-product/${id}`,
+        ` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/update-product/${id}`,
         productData
       );
       if (data?.success) {
@@ -218,7 +218,7 @@ const UpdateProduct = () => {
                 />
               ) : (
                 <Image
-                  src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${id}`}
+                  src={` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${id}`}
                   alt="product-image"
                   height="200px"
                   width={"200px"}

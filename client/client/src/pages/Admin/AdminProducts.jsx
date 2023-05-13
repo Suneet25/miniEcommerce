@@ -23,7 +23,7 @@ const AdminProducts = () => {
   let getAllProducts = async () => {
     try {
       let { data } = await axios.get(
-        " https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/get-product"
+        " https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/get-product"
       );
       setItems(data.products);
     } catch (error) {
@@ -80,7 +80,7 @@ const AdminProducts = () => {
                   borderRadius={"7px"}
                 >
                   <Image
-                    src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+                    src={` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${el._id}`}
                   />
                   <Flex justifyContent={"space-between"} alignItems={"center"}>
                     <Heading fontSize={"sm"} mt={3}>

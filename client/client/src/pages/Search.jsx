@@ -47,7 +47,7 @@ const Search = () => {
               borderRadius={"7px"}
             >
               <Image
-                src={` https://magenta-rose-donkey-robe.cyclic.app/api/v1/product/product-image/${el._id}`}
+                src={` https://dull-teal-angelfish-wig.cyclic.app/api/v1/product/product-image/${el._id}`}
               />
               <Flex justifyContent={"space-between"} alignItems={"center"}>
                 <Heading fontSize={"sm"} mt={3}>
